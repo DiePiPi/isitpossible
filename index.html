@@ -1,0 +1,105 @@
+<html>
+<script>
+    function work(){
+      var ori = document.getElementById('input').value;
+      document.getElementById('texthere').innerHTML = '';
+      var digits = ori.length;
+      ori = parseInt(ori);
+      var k = 0;
+      for(var i = 0; i == 0;){
+        var lastt = ori;
+        var instring = ori.toString();
+        var large = ltos(instring, digits);
+        var small = stol(instring, digits);
+        console.log(large + ' // ' + small);
+        var thiss = large - small;
+        if(thiss == lastt){
+          i = 1;
+        }else{
+          ori = thiss;
+          k++;
+        }
+        
+        document.getElementById('texthere').innerHTML += large + ' - ' + small + ' = ' + thiss + '<br>';
+        if(k > 100){
+          i = 1;
+          document.getElementById('texthere').innerHTML += 'over 100 times run<br>'
+        }
+      }
+      document.getElementById('texthere').innerHTML += 'done <br>' 
+    }
+    
+    function ltos(instring, digits){
+      var temp = '';
+      var invic = [instring[0]];
+      for(var i = 1; i < instring.length; i++){
+        invic.push(instring[i]);
+      }
+      
+      for(var i = 0; i < invic.length - 1; i++){
+        for(var j = i + 1; j < invic.length; j++){
+          var a = parseInt(invic[i]);
+          var b = parseInt(invic[j]);
+          console.log('a= ' + a + ' // b= ' + b);
+          if(a < b){
+            temp = invic[j];
+            invic[j] = invic[i];
+            invic[i] = temp;
+          }
+        }
+      }
+      var temp = invic[0];
+      for(var i = 1; i < invic.length; i++){
+        temp += invic[i];
+      }
+      
+      if(temp.length != digits){
+        temp += '0';
+      }
+      
+      return parseInt(temp);
+    }
+    
+    
+   function stol(instring, digits){
+      var temp = '';
+      var invic = [instring[0]];
+      for(var i = 1; i < instring.length; i++){
+        invic.push(instring[i]);
+      }
+      
+      for(var i = 0; i < invic.length - 1; i++){
+        for(var j = i + 1; j < invic.length; j++){
+          var a = parseInt(invic[i]);
+          var b = parseInt(invic[j]);
+          console.log('a= ' + a + ' // b= ' + b);
+          if(a > b){
+            temp = invic[j];
+            invic[j] = invic[i];
+            invic[i] = temp;
+          }
+        }
+      }
+      var temp = invic[0];
+      for(var i = 1; i < invic.length; i++){
+        temp += invic[i];
+      }
+      
+      //if(temp.length != digits){
+      //  temp = '0' + temp;
+      //}
+      
+      return parseInt(temp);
+    }
+
+</script>
+  <head>
+    <base target="_top">
+  </head>
+  <body>
+    <div>6147 theory<br>input a 4 digits number without all 4 digits the same</div>
+    <input id = "input" type="text"><br>
+    <input type="button" value="Start" onclick="work()">
+    <div id = "texthere"></div>
+  </body>
+</html>
